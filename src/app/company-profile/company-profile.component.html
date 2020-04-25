@@ -1,0 +1,95 @@
+
+<table *ngIf="companyDetails" class="table" style="background-color: white;">
+  <thead>
+      <tr>
+          <th colspan="2" class="text-center">Company Profile</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Company Logo:</td>
+      <td> <img  height="100px" width="100px" src="http://localhost:4000{{companyDetails.logo}}" /></td>
+    </tr>
+      <tr>
+          <td>Company Name:</td>
+          <td>{{companyDetails.companyName}}</td>
+      </tr>
+      <tr>
+          <td>Company Address:</td>
+          <td>{{companyDetails.companyAddress}}</td>
+      </tr>
+      <tr>
+        <td>Employer Name:</td>
+        <td>{{companyDetails.employerName}}</td>
+      </tr>
+
+      <tr>
+          <td>Email:</td>
+          <td>{{companyDetails.email}}</td>
+      </tr>
+      <tr>
+          <td colspan="2" class="text-center">
+              <input type="button" (click)="onLogout()" value="Logout" />
+
+          </td>
+          <td>
+            <input type="button" [routerLink]="['/postEvent']" value="Make Event Request" />
+          </td>
+      </tr>
+  </tbody>
+</table>
+
+
+<b>
+Acknoledged by Admin Ready to be upload Queset for this<br></b>
+Hear is the list:{{msgPending}}
+<div *ngFor="let e of QsetUploadingPandingEvent">
+
+  <mat-card class="example-card" style="background-color:wheat ;border: 2px solid black;">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{e.eventName}} </mat-card-title>
+      <mat-card-subtitle>{{e.companyId}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Registration Date:{{e.regStartDate}}<br>
+        Event Date:       {{e.eventDate}}<br>
+        strength:         {{e.strength}}<br>
+        status:           {{e.status}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="UploadQset(e.eventName)">UploadQset</button>
+
+    </mat-card-actions>
+  </mat-card>
+  </div>
+
+<br>
+<br>
+
+<b>rejecteed  by Admin<br></b>
+Hear is the list:{{msgReject}}
+<div *ngFor="let e of rejectEventsToShow">
+
+  <mat-card class="example-card" style="background-color:wheat ;border: 2px solid black;">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{e.eventName}} </mat-card-title>
+      <mat-card-subtitle>{{e.companyId}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Registration Date:{{e.regStartDate}}<br>
+        Event Date:       {{e.eventDate}}<br>
+        strength:         {{e.strength}}<br>
+        status:           {{e.status}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+
+
+    </mat-card-actions>
+  </mat-card>
+  </div>

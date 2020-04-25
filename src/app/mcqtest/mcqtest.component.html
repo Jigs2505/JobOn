@@ -1,0 +1,273 @@
+<div class="container">
+  <br>
+  <br>
+
+  <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" [(selectedIndex)]="Activetab"
+    [backgroundColor]="backgroundColorPrimary">
+
+    <mat-tab [disabled]='tab1'>
+      <ng-template mat-tab-label>
+        <em>Select Catagory</em>
+      </ng-template>
+      <div style="padding: 15px;">
+        <div style="color: red;">{{errormsg}}</div><br>
+      <h2> Here You Go</h2>
+      <div class="row">
+        <div class='col-sm-3'></div>
+
+        <div class='col-sm-6 text-center'>
+          <h4>Select Question Type</h4>
+          <mat-form-field>
+
+            <mat-label>Select Question Type</mat-label>
+            <mat-select required [(value)]="type">
+              <mat-option value="MCQ">MCQ Questions</mat-option>
+              <mat-option value="Coding">Coding Questions</mat-option>
+            </mat-select>
+
+          </mat-form-field>
+          <p>You selected: {{type}}</p>
+          <hr>
+        </div>
+        <div class='col-sm-3'></div>
+      </div>
+
+      {{jobTitleList}}
+      <hr>
+        <p>You selected: {{type}}</p>
+
+        <p>Till Now Total Questions Are:{{mcqQuestions.length}}</p>
+        <br>
+        <hr>
+        <br>
+        <button mat-raised-button color="primary" (click)=Active2()>Next</button>
+        <button mat-raised-button color="primary" [routerLink]="['/showEvent']" routerLinkActive="router-link-active" >End</button>
+      </div>
+    </mat-tab>
+
+    <mat-tab [disabled]='tab2'>
+
+      <ng-template mat-tab-label>
+        <mat-icon>Upload</mat-icon>QuestionSet
+      </ng-template>
+
+
+      <div class="col-sm-10">
+
+        <h1>Enter Title</h1>
+        <mat-form-field class="example-full-width">
+          <input matInput #title [(ngModel)]='Title' maxlength="256" required placeholder="Title">
+          <mat-hint align="start"><strong>Enter Title Proparly</strong> </mat-hint>
+          <mat-hint align="end">{{Title.length}} / 256</mat-hint>
+        </mat-form-field>
+        <p> {{Title}}</p>
+        <br>
+        <hr>
+        <br>
+        <h1>Enter Problem Statment</h1>
+        <br>
+
+        <div class="row">
+          <ejs-richtexteditor #toolsRTE id='alltoolRTE' [toolbarSettings]='tools' required name="name"
+            [(ngModel)]="stmt">
+          </ejs-richtexteditor>
+        </div>
+        <button ejs-button (click)="show()">show</button>
+
+        <button mat-raised-button color="primary" (click)=Active1()>previous</button>&nbsp;&nbsp;
+        <button mat-raised-button color="primary" (click)=Active3()>Next</button>
+        <div [innerHTML]='html'></div>
+      </div>
+    </mat-tab>
+    <mat-tab [disabled]='tab3'>
+
+
+
+      <ng-template mat-tab-label>
+        <mat-icon>Additional Things</mat-icon>
+      </ng-template>
+      <div class="row">
+        <div class='col-sm-3'></div>
+
+        <div class='col-sm-6 text-center'>
+          <h4>Enter Toughness of Question</h4>
+          <mat-form-field>
+
+            <mat-label>Toughness Of Question</mat-label>
+            <mat-select required [(value)]="Toughness">
+              <mat-option value="Easy">Easy</mat-option>
+              <mat-option value="Mediam">Mediam</mat-option>
+              <mat-option value="Hard">Hard</mat-option>
+
+            </mat-select>
+
+          </mat-form-field>
+          <p>You selected: {{Toughness}}</p>
+          <hr>
+        </div>
+        <div class='col-sm-3'></div>
+      </div>
+
+
+      <hr>
+
+
+
+        <div class="row">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Option A</mat-label>
+              <textarea matInput required [(ngModel)]="opA"></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Option B</mat-label>
+              <textarea matInput required [(ngModel)]="opB"></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Option C</mat-label>
+              <textarea matInput required [(ngModel)]="opC"></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Option D</mat-label>
+              <textarea matInput required [(ngModel)]="opD"></textarea>
+            </mat-form-field>
+
+            <div style="padding: 15px;">
+              <div style="color: red;">{{errormsg}}</div><br>
+              <mat-form-field>
+
+                <mat-label>Select an option</mat-label>
+                <mat-select required [(value)]="CrctOp">
+                  <mat-option value="None">None</mat-option>
+                  <mat-option value="A">A</mat-option>
+                  <mat-option value="B">B</mat-option>
+                  <mat-option value="C">C</mat-option>
+                  <mat-option value="D">D</mat-option>
+                </mat-select>
+
+              </mat-form-field>
+              <p>You selected: {{CrctOp}}</p>
+
+              {{opA}} {{opB}} {{opC}} {{opD}}
+              <br>
+              <hr>
+              <br>
+
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+
+
+
+
+      <button mat-raised-button color="primary" (click)=Active4()>Next</button>
+    </mat-tab>
+    <mat-tab [disabled]='tab4'>
+      <ng-template mat-tab-label>
+        Revise <em>Things</em>
+      </ng-template>
+      <br>
+      <div class="container">
+        <h1>Your Title</h1>
+        <mat-form-field class="example-full-width">
+          <input matInput #title [(ngModel)]='Title' [disabled]='editTitle==0' maxlength="256" required
+            placeholder="Title">
+          <mat-hint align="start"><strong>Enter Title Proparly</strong> </mat-hint>
+          <mat-hint align="end">{{Title.length}} / 256</mat-hint>
+        </mat-form-field>
+        <p> {{Title}}</p>
+        <button mat-raised-button color="primary" (click)=editTitlef()>{{ editTitle==1  ? 'Save' : 'Edit' }}</button>
+        <hr>
+        <div>
+          <h4>Review Toughness of Question</h4>
+          <mat-form-field>
+
+            <mat-label>Toughness Of Question</mat-label>
+            <mat-select required [(value)]="Toughness">
+              <mat-option value="Easy">Easy</mat-option>
+              <mat-option value="Mediam">Mediam</mat-option>
+              <mat-option value="Hard">Hard</mat-option>
+
+            </mat-select>
+
+          </mat-form-field>
+          <p>You selected: {{Toughness}}</p>
+          <hr>
+        </div>
+        <hr>
+
+        <hr>
+        <h1>Your Problem Statment</h1>
+        <br>
+
+        <div class="row">
+          <ejs-richtexteditor #toolsRTE id='alltoolRTE' [toolbarSettings]='tools' required name="name"
+            [(ngModel)]="stmt">
+          </ejs-richtexteditor>
+        </div>
+        <button ejs-button (click)="show()">show</button>
+        <hr>
+
+
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Option A</mat-label>
+            <textarea matInput required [(ngModel)]="opA" [disabled]='editOp==0'></textarea>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Option B</mat-label>
+            <textarea matInput required [(ngModel)]="opB" [disabled]='editOp==0'></textarea>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Option C</mat-label>
+            <textarea matInput required [(ngModel)]="opC" [disabled]='editOp==0'></textarea>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Option D</mat-label>
+            <textarea matInput required [(ngModel)]="opD" [disabled]='editOp==0'></textarea>
+          </mat-form-field>
+
+          <hr>
+          <div style="padding: 15px;">
+            <div style="color: red;">{{errormsg}}</div><br>
+            <mat-form-field>
+
+              <mat-label>Select an option</mat-label>
+              <mat-select required [(value)]="CrctOp" [disabled]='editOp==0'>
+                <mat-option value="None">None</mat-option>
+                <mat-option value="A">A</mat-option>
+                <mat-option value="B">B</mat-option>
+                <mat-option value="C">C</mat-option>
+                <mat-option value="D">D</mat-option>
+              </mat-select>
+
+            </mat-form-field>
+            <p>You selected: {{CrctOp}}</p>
+
+            {{opA}} {{opB}} {{opC}} {{opD}}
+            <br>
+            <hr>
+            <br>
+            <button mat-raised-button color="primary" (click)=editOpf()>{{ editOp==1  ? 'Save' : 'Edit' }}</button>
+            <hr>
+          </div>
+
+
+        <button mat-raised-button color="primary" (click)=SaveQ()>Save And Next</button>
+        <button mat-raised-button color="primary" (click)=EndQ()>End</button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+
+  <br>
+  <br>
+</div>

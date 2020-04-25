@@ -1,0 +1,175 @@
+
+<div class="container">
+  <br>
+  <br>
+
+  <mat-tab-group  mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4" [(selectedIndex)]="Activetab" >
+
+    <mat-tab [disabled]='tab1' >
+      <ng-template mat-tab-label>
+        Select  <em>Catagory</em>
+      </ng-template>
+      <div style="padding: 15px">
+        {{errormsg}}<br>
+        <mat-form-field>
+
+          <mat-label>Select an option</mat-label>
+          <mat-select  required [(value)]="selected">
+            <mat-option value="None">None</mat-option>
+            <mat-option value="MCQ">MCQ Questtion</mat-option>
+            <mat-option value="Code">Code Question</mat-option>
+
+          </mat-select>
+
+        </mat-form-field>
+        <p>You selected: {{selected}}</p>
+        <br>
+        <hr>
+        <br>
+        <button mat-raised-button color="primary" (click)=Active2()>Next</button>
+      </div>
+    </mat-tab>
+
+    <mat-tab [disabled]='tab2' >
+
+      <ng-template mat-tab-label>
+        <mat-icon>Upload</mat-icon>QuestionSet
+      </ng-template>
+
+
+      <div  class="col-sm-10">
+
+        <h1>Enter Title</h1>
+        <mat-form-field class="example-full-width">
+          <input matInput #title [(ngModel)]='Title'maxlength="256" required placeholder="Title">
+          <mat-hint align="start"><strong>Enter Title Proparly</strong> </mat-hint>
+          <mat-hint align="end">{{Title.length}} / 256</mat-hint>
+        </mat-form-field>
+        <p> {{Title}}</p>
+        <br>
+        <hr>
+        <br>
+        <h1>Enter Problem Statment</h1>
+        <br>
+
+        <ejs-richtexteditor #toolsRTE id='alltoolRTE' [toolbarSettings]='tools'  required  name="name" [(ngModel)]="value" >
+        </ejs-richtexteditor>
+
+        <button ejs-button (click)="show()">show</button>
+
+        <button mat-raised-button color="primary" (click)=Active1() >previous</button>&nbsp;&nbsp;
+        <button mat-raised-button color="primary" (click)=Active3() >Next</button>
+        <div [innerHTML]='html'></div>
+      </div>
+    </mat-tab>
+    <mat-tab [disabled]='tab3' >
+      <ng-template mat-tab-label>
+        <mat-icon>thumb_down</mat-icon> The worst sushi
+      </ng-template>
+      <div class="row">
+        <div class='col-sm-4'></div>
+        <div class='col-sm-4 text-center'>
+         <mat-form-field>
+
+          <mat-label>Toughness Of Question</mat-label>
+          <mat-select  required [(value)]="Toughness">
+            <mat-option value="Easy">Easy</mat-option>
+            <mat-option value="Mediam">Mediam</mat-option>
+            <mat-option value="Hard">Hard</mat-option>
+
+          </mat-select>
+
+        </mat-form-field>
+        <p>You selected: {{Toughness}}</p>
+        <hr>
+      </div>
+      <div class='col-sm-4'></div>
+    </div>
+
+
+
+    <hr>
+    <div class="row">
+      <div class='col-sm-4'></div>
+      <div class='col-sm-4 text-center'>
+       <h1>Enter Sample Input Output</h1>
+       <mat-form-field class="example-full-width">
+        <input matInput #title [(ngModel)]='ip'maxlength="256" required placeholder="Input">
+        <mat-hint align="start"><strong>Enter Input Proparly</strong> </mat-hint>
+        <mat-hint align="end">{{ip.length}} / 256</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput #title [(ngModel)]='op'maxlength="256" required placeholder="OutPut">
+        <mat-hint align="start"><strong>Enter OutPut Proparly</strong> </mat-hint>
+        <mat-hint align="end">{{op.length}} / 256</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput #title [(ngModel)]='ipopexp'maxlength="256" required placeholder="Explantation">
+        <mat-hint align="start"><strong>Enter Explantation Proparly</strong> </mat-hint>
+        <mat-hint align="end">{{ipopexp.length}} / 256</mat-hint>
+      </mat-form-field>
+      <p>{{ip}} </p>
+      <br>
+      <p>{{op}} </p>
+      <br>
+      <p>{{ipopexp}}</p>
+      <button mat-raised-button color="primary" (click)=insertSampleipop()> if Next</button>
+      <mat-hint align="end">{{sampleipop.length}} / 10</mat-hint>
+      <ul>
+        {{errormsg}}
+        <li *ngFor='let i of sampleipop'>
+          {{i.ip}}
+          {{i.op}}
+          {{i.ipopexp}}
+        </li>
+      </ul>
+      <br>
+      <hr>
+    </div>
+    <div class='col-sm-4'></div>
+
+  </div>
+  <button mat-raised-button color="primary" (click)=Active2()>Previous</button>
+  <button mat-raised-button color="primary" (click)=Active4()>Next</button>
+</mat-tab>
+<mat-tab [disabled]='tab4' >
+  <ng-template mat-tab-label>
+    Revise  <em>Things</em>
+  </ng-template>
+  <br>
+  <h1>Sample Input Optput </h1>
+  <ul  *ngFor='let i of sampleipop; let ind = index '>
+  <div class="row">
+    <div class="col-sm-3">
+     <mat-form-field class="example-full-width">
+      <mat-label>Input</mat-label>
+      <textarea matInput [disabled]='!showSave' [value]='i.ip' ></textarea>
+    </mat-form-field>
+    </div>
+
+    <div class="col-sm-3 " > <mat-form-field class="example-full-width">
+      <mat-label>Output</mat-label>
+      <textarea matInput  [disabled]='!showSave'[value]='i.op'></textarea>
+    </mat-form-field>
+    </div>
+
+
+    <div class="col-sm-3" > <mat-form-field class="example-full-width">
+      <mat-label>Explantion</mat-label>
+      <textarea matInput  [disabled]='!showSave' [value]='i.ipopexp' ></textarea>
+    </mat-form-field></div>
+
+
+    <div class="col-sm-3"><button mat-raised-button color="primary" [value]='ind' (click)=callall(ind)>{{showSave ? 'Save' : 'Edit'}}</button></div>
+  </div>
+  </ul>
+  <hr>
+
+<button mat-raised-button color="primary" (click)=Active1()>Next</button>
+</mat-tab>
+</mat-tab-group>
+
+
+<br>
+<br>
+</div>

@@ -1,0 +1,73 @@
+<table *ngIf="userDetails" class="table" style="background-color: white;">
+  <thead>
+      <tr>
+          <th colspan="2" class="text-center">User Profile</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>logo</td>
+      <td> <img  height="100px" width="100px" src="http://localhost:4000{{userDetails.logo}}" /></td>
+    </tr>
+      <tr>
+          <td>Name</td>
+          <td>{{userDetails.fullName}}</td>
+      </tr>
+      <tr>
+          <td>Email</td>
+          <td>{{userDetails.email}}</td>
+      </tr>
+      <tr>
+          <td colspan="1" class="text-center">
+              <input type="button" (click)="onLogout()" value="Logout" />
+          </td>
+          <td colspan="1" class="text-center">
+            <input type="button" (click)="edit()" value="EditProfile" />
+        </td>
+
+      </tr>
+  </tbody>
+</table>
+{{msg}}<br>
+<div *ngFor="let EC of pandingEventsToShow; index as i">
+  <div *ngFor="let e of EC.eventDetails">
+
+  <mat-card class="example-card" style="background-color:wheat ;border: 2px solid black;">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{e.eventName}} </mat-card-title>
+      <mat-card-subtitle>{{e.companyId}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Registration Date:{{e.regStartDate}}<br>
+        Event Date:       {{e.eventDate}}<br>
+        strength:         {{e.strength}}<br>
+        status:           {{e.status}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="btn btn-primary" (click)="Accept(e.eventName)">Accept</button>
+      <button class="btn btn-primary" (click)="Reject(e.eventName)">Reject</button>
+    </mat-card-actions>
+  </mat-card>
+  </div>
+   <div *ngFor="let c of EC.companyDetails">
+    <mat-card style="background-color:wheat ;border: 2px solid black;">
+          <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{c.companyName}} </mat-card-title>
+      <mat-card-subtitle>{{c.employerName}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+       Email:{{c.email}}<br>
+        Address:       {{c.companyAddress}}<br>
+
+      </p>
+    </mat-card-content>
+
+  </mat-card>
+  </div>
+</div>
+<!-- <button class="btn btn-primary" (click)="onLogout()">Logout</button> -->

@@ -1,0 +1,96 @@
+:host {
+  >.container {
+      max-width: 1264px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      background: none;
+  }
+/deep/{
+      .mat-tab-group {
+          flex-direction: row;
+      }
+      .mat-tab-header {
+        border-bottom: none;
+      }
+      .mat-tab-header-pagination {
+          display: none !important;
+      }
+      .mat-tab-labels {
+          flex-direction: column;
+      }
+      .mat-ink-bar {
+          height: 100%;
+          left: 98% !important;
+      }
+      .mat-tab-body-wrapper {
+          flex: 1 1 auto;
+      }
+  }
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  flex: 1 0 auto;
+  margin: 0 auto;
+  text-align: left;
+}
+
+#content {
+  box-sizing: content-box;
+  margin: 0 auto;
+  padding: 15px;
+  width: 1264px;
+  background-color: #ffffff;
+}
+
+#content {
+  max-width: 1100px;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+#content,
+#main-content {
+  &::before,
+  &::after {
+      content: "";
+      display: table;
+  }
+  &::after {
+      clear: both;
+  }
+}
+
+div.label-box { border-top-left-radius: .5rem !important; border-top-right-radius: .5rem !important; }
+.form-control { border-radius: 7px 7px !important; width: auto;}
+.form-control:disabled { background-color: #ffffff !important; }
+.output { border-bottom-left-radius: .5rem !important; border-bottom-right-radius: .5rem !important; }
+.btn-beautify { color: #ffffff; background-color: #e83e8c; }
+select.languages-select { cursor: pointer; }
+select.languages-select > option { display: block; background: ghostwhite; }
+select.languages-select:focus > option:checked { font-weight: bold; }
+button.cant-click { cursor: not-allowed; }
+div.code-editor{max-height: none;}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.iphide{
+  display: none;
+}
+

@@ -1,0 +1,87 @@
+
+<div class="container" style="text-align:center">
+  <div class="row" style="padding: 15px;"><div class="col-sm-3"></div>
+  <div class="col-sm-6"><h1>Event Post Form</h1></div>
+  <div class="col-sm-3"></div></div>
+  <br>
+  <div class="row "></div>
+  <div class="row" style="padding: 15px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+           <mat-form-field appearance="outline" style="width: 100%;">
+
+              <mat-label>Event Name</mat-label>
+          <input matInput  [(ngModel)]='EventName' maxlength="256" style="width: 100%;" required >
+          <mat-hint align="begin">Must Be Unique </mat-hint>
+          <mat-hint align="end">{{EventName.length || 0}}/256 </mat-hint>
+        </mat-form-field></div>
+      <div class="col-sm-3"></div>
+  </div>
+
+
+  <div class="row" style="padding: 15px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+          <mat-form-field appearance="outline"  style="width: 100%;">
+              <mat-label>Strength</mat-label>
+              <input matInput type="number" placeholder="e.g 250" [(ngModel)]='Strength' max=5000 style="width: 100%;" required>
+
+
+            </mat-form-field>
+      </div>
+      {{Strength}}
+      <div class="col-sm-3"></div>
+  </div>
+
+  <div class="row" style="padding: 15px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+          <mat-form-field appearance="outline"  style="width: 100%;">
+              <mat-label>Registration Start Date</mat-label>
+              <input matInput type="date" [(ngModel)]='Reg_Start_Date' min="{{minDate}}" style="width: 100%;" required>
+
+
+            </mat-form-field>
+            {{Reg_Start_Date}}{{minDate}}
+      </div>
+      <div class="col-sm-3"></div>
+  </div>
+  <div class="row" style="padding: 15px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+          <mat-form-field appearance="outline"  style="width: 100%;">
+              <mat-label>Event On The Date</mat-label>
+              <input matInput type="date"[(ngModel)]='Event_date' style="width: 100%;" required>
+
+
+            </mat-form-field>
+            {{Event_date}}
+      </div>
+      <div class="col-sm-3"></div>
+  </div>
+
+<div class="row" style="padding: 15px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+          <mat-form-field appearance="outline"  style="width: 100%;">
+              <mat-label>Description </mat-label>
+              <input matInput placeholder="e.g Ahmedabad" [(ngModel)]='Description' maxlength="500" style="width: 100%;" required>
+
+              <mat-hint align="end">{{Description.length || 0}}/500 </mat-hint>
+            </mat-form-field>
+      </div>
+      <div class="col-sm-3"></div>
+  </div>
+
+
+  <div class="row" style="padding: 15px;">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+          <button mat-raised-button color="primary" (click)='postEvent()'>Post Job</button>
+      </div>
+      <div class="col-sm-3"></div>
+  </div>
+</div>
+
+
+

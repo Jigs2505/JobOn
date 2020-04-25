@@ -1,0 +1,27 @@
+
+<b style="font-size: 25px;">Rate Quality of Service:</b><mat-form-field>
+<mat-label>QOS Rating</mat-label>
+
+          <mat-select required [(value)]="QOSRating">
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="4">4</mat-option>
+            <mat-option value="5">5</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+<b style="font-size: 25px;">Rate System:</b><mat-form-field>
+
+<mat-label>jobOn Rating</mat-label>
+          <mat-select required [(value)]="jobOnRating">
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="4">4</mat-option>
+            <mat-option value="5">5</mat-option>
+          </mat-select>
+        </mat-form-field>
+<br><br>
+        <button  class="btn btn-success" (click)="submitRating()">Submit</button>
+        <button  class="btn btn-info"  (click)="router.navigate(['/result']);">View Result</button>

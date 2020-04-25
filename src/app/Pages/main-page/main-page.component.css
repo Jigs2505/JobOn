@@ -1,0 +1,27 @@
+div.label-box { border-top-left-radius: .5rem !important; border-top-right-radius: .5rem !important; }
+.form-control { border-radius: 7px 7px !important; width: auto;}
+.form-control:disabled { background-color: #ffffff !important; }
+.output { border-bottom-left-radius: .5rem !important; border-bottom-right-radius: .5rem !important; }
+.btn-beautify { color: #ffffff; background-color: #e83e8c; }
+select.languages-select { cursor: pointer; }
+select.languages-select > option { display: block; background: ghostwhite; }
+select.languages-select:focus > option:checked { font-weight: bold; }
+button.cant-click { cursor: not-allowed; }
+div.code-editor{max-height: none;}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.iphide{
+  display: none;
+}

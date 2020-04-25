@@ -1,0 +1,199 @@
+
+<div >
+  <div>
+    <div id="main-content">
+      <div style="text-align: center;background-color: steelblue;font-size: 20px;color: tomato;">Time Left=2:30:49</div>
+      <button  class="btn btn-success" style="margin: 0 auto;display: block;" (click)="router.navigate(['/giveRating']);">submitTest</button>
+      <mat-tab-group>
+        <mat-tab style="font-weight: bolder;" label="Mcq Question">
+
+           <div id="main-content">
+      <mat-tab-group [(selectedIndex)]="Activetab" (selectedTabChange)="MCQtabChanged($event)">
+        <div *ngFor="let item of Queset.mcqQue;let ind=index" >
+        <mat-tab [label]='ind+1'>
+          <b style="font-size: 25px;">Question:{{ind +1}}</b><br><br>
+          <b style="font-size: 20px;">Statement:</b> <div [innerHTML]="item.statement" ></div>
+          <b style="font-size: 20px;">Options:</b>
+         <br>
+         <div style="font-size: 20px;">A:)  {{item.op1}}</div>
+         <br>
+         <div style="font-size: 20px;">B:)  {{item.op2}}<br></div>
+          <div style="font-size: 20px;">C:)  {{item.op3}}<br></div>
+          <div style="font-size: 20px;">D:)  {{item.op4}}</div>
+         <br>
+         <b style="font-size: 25px;"> Your Ans:</b><mat-form-field>
+
+          <mat-label>Select an option</mat-label>
+          <mat-select required [(value)]="CrctOp">
+            <mat-option value="None">None</mat-option>
+            <mat-option value="A">A</mat-option>
+            <mat-option value="B">B</mat-option>
+            <mat-option value="C">C</mat-option>
+            <mat-option value="D">D</mat-option>
+          </mat-select>
+
+
+
+        </mat-form-field>
+<br>
+        <button  class="btn btn-success" (click)="submitMcq(ind,CrctOp)">Submit</button>
+
+        <button  class="btn btn-primary"  (click)="nextMcq(ind)">next</button>
+        </mat-tab>
+      </div>
+      </mat-tab-group>
+      <button  class="btn btn-success" (click)="submitAllMcq()">SubmitAllMcq</button>
+    </div>
+        </mat-tab>
+        <mat-tab style="font-weight: bolder;" label="Coding Questions">
+          <div id="main-content">
+
+            <mat-tab-group (selectedTabChange)="CodetabChanged($event)" >
+              <div *ngFor="let item of Queset.codingQue;let ind=index">
+              <mat-tab [label]='ind+1'>
+                <div [innerHTML]="item.statement" ></div>
+                <div *ngFor="let sipop of item.sampleIpOps">
+                  Sample
+                  Input:<br>
+                  <pre >{{sipop.input}}</pre>
+                  Output:
+                  <pre >{{sipop.output}}</pre>
+                  Explaination:<br>
+                  <pre >{{sipop.explaination}}</pre>
+
+                </div>
+                <div>
+                  <nav class="navbar navbar-light bg-light ">
+                      <div class="container text-center p-2 ">
+                          <span class="mx-auto font-weight-bold">IDE</span>
+                      </div>
+                  </nav>
+                </div>
+
+                <div class="container h-100 mt-4">
+
+                  <!-- languages & theme / error message -->
+                  <div class="row mb-4 justify-content-center mx-4">
+                      <!-- if failed to reach server, show error message -->
+                      <div *ngIf="cantReachServer; else reachServer">
+                          <span class="font-weight-bold">Can't reach server :( , try to refresh the page.. </span>
+                      </div>
+
+                      <ng-template #reachServer>
+                          <!-- languages select -->
+                          <div class="col-auto col-lg-auto col-md-auto col-sm-auto">
+                              <div class="input-group input-group-sm">
+                                  <div class="input-group-prepend">
+                                      <label class="input-group-text" for="languages-select">Languages</label>
+                                  </div>
+
+                                  <select *ngIf="(languagesArray$ | async) as languages; else loadingLanguages;" class="languages-select"
+                                      id="languages-select" #languagesSelect (change)="onChangeLanguageMode($event,codeEditor)">
+                                      <option *ngFor="let language of languages; let i = index" value="{{i}}" [selected]="initEditorOptions.languageMode===language.lang">
+                                          {{language.name}} ({{language.version}})
+                                      </option>
+                                  </select>
+
+                                  <!-- loading message while waiting languagesArray$ -->
+                                  <ng-template #loadingLanguages>
+                                      <span class="mx-2">Loading ...</span>
+                                  </ng-template>
+                              </div>
+                          </div>
+                          <!-- theme radio buttons -->
+                          <div class="col-auto col-lg-3 col-md-4 col-sm-6">
+                              <div class="btn-group btn-group-toggle btn-group-sm w-100 mx-auto" data-toggle="buttons">
+                                  <label *ngFor="let theme of supportedThemes" [ngClass]="{'active': theme===activatedTheme}" (click)="onChangeTheme(theme,codeEditor); activatedTheme=theme;" class="btn btn-secondary sudo-radio-btn">
+                                      <input type="radio" name="{{theme}}" autocomplete="off" [checked]="theme===activatedTheme">
+                                      <span>{{theme}}</span>
+                                  </label>
+                              </div>
+                          </div>
+                      </ng-template>
+                  </div>
+
+                  <!-- the code editor -->
+                  <div class="row mb-4" style="">
+                    <div  class="col" style="
+                    border: 1px solid black;
+                    padding: 0px;
+                    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 4px 6px 0 rgba(0,0,0,0.19) !important;">
+                          <app-code-editor [initOptions]="initEditorOptions" #codeEditor  style="max-height: none;"></app-code-editor>
+                      </div>
+                  </div>
+                <!-- input checkbox-->
+                <div class="checked">
+                  Custom input &nbsp;<button value="Click" (click)="custipOnOff()" style="border-style:hidden;"><i class="fa fa-edit" style="font-size:20px"></i></button>
+                  </div>
+                  <div class="row mb-4 mx-4 pt-2">
+                    <textarea #custip class="form-control input"   id="input" [ngClass]="{'iphide':!visibleIp}"cols="50" id="input" maxlength="10000" placeholder="Input Goes Here.." style="height:200px;border-radius: 5px;border: 1px solid black;border-radius: 5px;">    </textarea>
+                  </div>
+                  <!-- run,submit,clear & beautify buttons -->
+                  <div class="row justify-content-center mb-4 mx-4 pt-2">
+                      <!-- run button -->
+                      <div class="col-4 col-lg-2 col-md-3 col-sm-4 w-75">
+                          <button type="button" class="btn btn-dark btn-sm btn-block px-4 mx-2" [ngClass]="{'cant-click' : cantReachServer}"
+                              [disabled]="cantReachServer" (click)="onRunContent(codeEditor,custip,languagesSelect,ind,item)" >
+                              <div id="spinbtn"  >Run</div>
+                          </button>
+
+                      </div>
+                      <!-- clear button -->
+                      <div class="col-4 col-lg-2 col-md-3 col-sm-4 w-75">
+                          <button type="button" class="btn btn-primary btn-sm btn-block px-4 mx-2" (click)="onClearContent(codeEditor,ind)">
+                              Clear
+                          </button>
+                      </div>
+                      <div class="col-4 col-lg-2 col-md-3 col-sm-4 w-75">
+                        <button type="button" class="btn btn-primary btn-sm btn-block px-4 mx-2" (click)="submit(codeEditor,languagesSelect,item,ind)">
+                              Submit
+                        </button>
+                      </div>
+                      <!-- beautify button -->
+                      <div class="col-4 col-lg-2 col-md-3 col-sm-4 w-75">
+                          <button type="button" class="btn btn-beautify btn-sm btn-block px-4 mx-2" (click)="onBeautifyContent(codeEditor,ind)">
+                              Beautify
+                          </button>
+                      </div>
+                  </div>
+
+                  <!-- output box -->
+                  <div class="row mt-4">
+                      <div class="col">
+                          <div class="label-box border spinn">
+                              <span class="mx-4 font-weight-light">Output</span>
+                          </div>
+                          <textarea class="form-control output" style="width: 100%;" (onchange)="offspin()" rows="6"
+                          disabled="true" aria-label="output-textarea"
+                          [value]="(output$ | async ) || msg || ''">
+                      </textarea>
+                      </div>
+                  </div>
+                  <table [ngClass]="{'iphide':!visibleTable}">
+                   <tr>
+                    <th>Testcase No</th>
+                     <th>Output Status</th>
+                     <th>MemoryTime</th>
+                     <th>Cpu Time</th>
+                  </tr>
+                  <div  *ngFor="let item of SubmissionArray">
+                  <tr>
+                    <td>{{item.index}}</td>
+                     <td>{{item.status}}</td>
+                     <td>{{item.output.memory}}</td>
+                     <td>{{item.output.cpuTime}}</td>
+                  </tr>
+                </div>
+                  </table>
+                </div>
+                  <br>
+              </mat-tab>
+            </div>
+            </mat-tab-group>
+            <button  mat-button  (click)="submitAllCode()">SubmitAllCode</button>
+
+          </div>
+        </mat-tab>
+
+      </mat-tab-group>
+

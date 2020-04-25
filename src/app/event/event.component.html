@@ -1,0 +1,28 @@
+
+<div class="container m-5 shadow-lg border-0 p-5">
+
+  <li *ngFor="let item of mcqDetails">
+  <label id="example-radio-group-label">{{item.statement}}</label>
+  <mat-radio-group
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group"
+    [(ngModel)]="myans">
+    <mat-radio-button class="example-radio-button">
+      {{item.op1}}
+    </mat-radio-button>
+    <mat-radio-button class="example-radio-button">
+      {{item.op2}}
+    </mat-radio-button>
+    <mat-radio-button class="example-radio-button">
+      {{item.op3}}
+    </mat-radio-button>
+    <mat-radio-button class="example-radio-button">
+      {{item.op4}}
+    </mat-radio-button>
+
+  </mat-radio-group>
+
+  </li>
+
+  </div>
+

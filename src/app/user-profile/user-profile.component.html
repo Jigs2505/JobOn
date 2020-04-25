@@ -1,0 +1,53 @@
+<table *ngIf="userDetails" class="table" style="background-color: white;">
+  <thead>
+      <tr>
+          <th colspan="2" class="text-center">User Profile</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>logo</td>
+      <td> <img  height="100px" width="100px" src="http://localhost:4000{{userDetails.logo}}" /></td>
+    </tr>
+      <tr>
+          <td>Name</td>
+          <td>{{userDetails.fullName}}</td>
+      </tr>
+      <tr>
+          <td>Email</td>
+          <td>{{userDetails.email}}</td>
+      </tr>
+      <tr>
+          <td colspan="1" class="text-center">
+              <input type="button" (click)="onLogout()" value="Logout" />
+          </td>
+          <td colspan="1" class="text-center">
+            <input type="button" (click)="edit()" value="EditProfile" />
+        </td>
+
+      </tr>
+  </tbody>
+</table>
+<div *ngFor="let e of Events; index as i">
+  <mat-card class="example-card" style="background-color:wheat ;border: 2px solid black;">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{e.eventName}} </mat-card-title>
+      <mat-card-subtitle>{{e.companyId}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Registration Date:{{e.regStartDate}}<br>
+        Event Date:       {{e.eventDate}}<br>
+        strength:         {{e.strength}}<br>
+        <!-- status:           {{e.status}} -->
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button  [disabled]="isdesabled" class="btn btn-primary" (click)="registerForEvent(e.eventName)">register or join</button>
+
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+

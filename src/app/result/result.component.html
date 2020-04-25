@@ -1,0 +1,40 @@
+<div class='col-sm-6 text-center'>
+  <h4>Select eventname:</h4>
+  <mat-form-field>
+
+   <mat-label>EventName</mat-label>
+    <mat-select style="margin: 0 auto;display: block;" required [(ngModel)]="ename"  (selectionChange)="changeEvent()">
+      <mat-option  *ngFor="let item of events" [(value)]="item.eventName">{{item.eventName}}</mat-option>
+
+
+    </mat-select>
+
+  </mat-form-field><br>
+  <b style="font-size: 15px;">You selected:</b><b style="font-size: 20px;" > {{ename}}</b>
+  <hr>
+</div>
+  <!-- <label>EventName</label> -->
+
+            <!-- <select required [(value)]="ename"  *ngFor="let item of events">
+              <option value="item.eventName">{{item.eventName}}</option>
+            </select>
+          <br> -->
+<table class="table" >
+  <thead>
+  <tr>
+   <th>UserName</th>
+    <th>Result</th>
+    <th>Total</th>
+ </tr>
+</thead>
+
+
+  <tbody *ngFor="let item of results">
+ <tr>
+   <td>{{item.userName}}</td>
+    <td>{{item.result}}</td>
+    <td>{{item.total}}</td>
+ </tr>
+</tbody>
+
+ </table>
